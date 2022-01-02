@@ -9,7 +9,7 @@ from pygame.sprite import Group
 from os import path
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, window_width: int, window_height: int, bullets: Group, all_sprites: Group, img_path: path, *groups: abstractproperty) -> None:
+    def __init__(self, window_width: int, window_height: int, bullets: Group, all_sprites: Group, img_path: path, snd_path: path, *groups: abstractproperty) -> None:
         super().__init__(*groups)
         sprite = pygame.image.load(path.join(img_path, 'player.png')).convert_alpha()
         self.image = pygame.transform.scale(sprite, (50, 50))
@@ -24,6 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.window_width = window_width
         self.window_height = window_height
         self.bullets = bullets
+        self.shoot_sound = pygame.mixer.Sound(path.join(snd_path, 'pew.wav'))
         self.all_sprites = all_sprites
         self.bullet_img = pygame.image.load(path.join(img_path, 'laserRed01.png')).convert()
         self.bullet_img.set_colorkey(Colors.BLACK)
@@ -46,3 +47,4 @@ class Player(pygame.sprite.Sprite):
         bullet = Bullet(self.rect.centerx, self.rect.top, self.bullet_img)
         self.all_sprites.add(bullet)
         self.bullets.add(bullet)
+        self.shoot_sound.play()

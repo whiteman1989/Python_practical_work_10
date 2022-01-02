@@ -30,7 +30,7 @@ all_sprites = pygame.sprite.Group()
 mobs = pygame.sprite.Group()
 mob_factroy = MobFactory(width, height, img_dir, all_sprites, mobs)   
 bullets = pygame.sprite.Group()
-player = Player(width, height, bullets, all_sprites, img_dir)
+player = Player(width, height, bullets, all_sprites, img_dir, snd_dir)
 all_sprites.add(player)
 for i in  range(8):
     m = mob_factroy.create_mob()
